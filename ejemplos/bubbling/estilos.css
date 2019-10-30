@@ -1,0 +1,41 @@
+#carrito {
+	width: 400px;
+	margin: 0 auto;
+	padding: 10px;
+	border: 2px solid #DDD;
+}
+
+#carrito ul {
+	margin: 0;
+	padding: 0;
+}
+
+#carrito ul li {
+	list-style: none;
+	margin: 5px;
+	padding: 5px;
+	background-color: #EEE;
+}
+
+#carrito .nombre {
+	float: left;
+}
+
+#carrito .cantidad {
+	float: right;
+	width: 60px;
+}
+
+#carrito .clear {
+	clear: both;
+}
+
+#btn_comprar {
+	display: block;
+	margin: 0 auto;
+	margin-top: 15px;
+}
+
+.cantidadModificada {
+	background-color: #F7FFB6;
+}
