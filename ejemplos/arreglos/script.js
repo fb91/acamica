@@ -7,15 +7,15 @@ Extra: reutilizar la misma lógica para poder ingresar las notas de 4 alumnos y 
 
 */
 const CANTIDAD_NOTAS = 3
-const CANTIDAD_ALUMNOS = 4
+const CANTIDAD_ALUMNOS = 2
 
 /**
  * Función principal
  */
 function main () {
-  let totalNotasAlumnos = obtenerTotalNotasAlumnos ();
-  let promedioTotalAlumnos = calcularTotalPromedios(totalNotasAlumnos);
-  console.log(totalNotasAlumnos); //Abrir consola para ver cómo queda este arreglo de arreglos.
+  let totalAlumnos = obtenerTotalAlumnos ();
+  let promedioTotalAlumnos = calcularTotalPromedios(totalAlumnos);
+  console.log(totalAlumnos); //Abrir consola para ver cómo queda este arreglo de arreglos.
   alert('El promedio total de los ' + CANTIDAD_ALUMNOS + ' alumnos es de: ' + promedioTotalAlumnos);
 }
 
@@ -23,15 +23,20 @@ function main () {
  * @param numeroDeAlumno: número de alumno al cual se va a solicitar las notas.
  * @return notasAlumno: arreglo unidimensional con las notas del alumno.
  */
-function obtenerNotasAlumno (numeroDeAlumno) {
+function obtenerAlumno () {
   let notasAlumno = [];
+  let nom = prompt('Ingrese nombre')
   while (notasAlumno.length < CANTIDAD_NOTAS) {
-    let notaIngresada = parseInt(prompt("Ingrese la nota N°" + (notasAlumno.length+1) + " del alumno N°" + (numeroDeAlumno+1) + "."));
+    let notaIngresada = parseInt(prompt("Ingrese la nota N°" + (notasAlumno.length+1) + " del alumno " + nom + "."));
     if (esNotaValida(notaIngresada)) {
       notasAlumno.push(notaIngresada);
     }
   }
-  return notasAlumno;
+  var alumno = {
+    nombre: nom,
+    notas: notasAlumno
+  }
+  return alumno;
 }
 
 /**
@@ -61,10 +66,10 @@ function calcularPromedio (listaNumeros) {
  * @param listaNotasTodosAlumnos: arreglo que contiene en cada uno de sus elementos, un arreglo con las notas correspondientes a un alumno.
  * @return promedio total de todas las notas de todos los alumnos.
  */
-function calcularTotalPromedios (listaNotasTodosAlumnos) {
+function calcularTotalPromedios (listaTodosAlumnos) {
   let listaPromedios = [];
-  for (let i=0; i<listaNotasTodosAlumnos.length; i++) {
-    listaPromedios.push(calcularPromedio(listaNotasTodosAlumnos[i]))
+  for (let i=0; i<listaTodosAlumnos.length; i++) {
+    listaPromedios.push(calcularPromedio(listaTodosAlumnos[i].notas))
   }
   return calcularPromedio(listaPromedios)
 }
@@ -72,12 +77,12 @@ function calcularTotalPromedios (listaNotasTodosAlumnos) {
 /**
  * @return arreglo de arreglos de notas.
  */
-function obtenerTotalNotasAlumnos () {
-  let totalNotasAlumnos = [];
-  while (totalNotasAlumnos.length < CANTIDAD_ALUMNOS) {
-    totalNotasAlumnos.push(obtenerNotasAlumno(totalNotasAlumnos.length));
+function obtenerTotalAlumnos () {
+  let totalAlumnos = [];
+  while (totalAlumnos.length < CANTIDAD_ALUMNOS) {
+    totalAlumnos.push(obtenerAlumno());
   }
-  return totalNotasAlumnos;
+  return totalAlumnos;
 }
 
 window.onload = main();
